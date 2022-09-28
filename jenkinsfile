@@ -1,14 +1,26 @@
-node('JAVA11') {
-    stage('vcs') {
-        git branch: 'NEW_PROJECT_1', url: 'https://github.com/krishna5683akp/spring-petclinic.git'
-    }
-    stage("build") {
-        sh 'mvn package'
-    }
-    stage("archive junit") {
-        junit '**/surefire-reports/*xml'
-    }
-    stage("archive artifacts") {
-        archive 'target/*.jar'
+pipeline {
+    agent {label 'JAVA11'}
+    stages {
+        stage ('vcs') {
+            steps {
+                        git branch: 'NEW_PROJECT_1', url: 'https://github.com/krishna5683akp/spring-petclinic.git'
+
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('archive junit') {
+            steps {
+                junit '**/surefire-reports/*xml'
+            }
+        }
+        stage('archive artifacts') {
+            steps {
+                archive 'target/*.jar'
+            }
+        }
     }
 }
