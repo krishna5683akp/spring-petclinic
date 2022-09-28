@@ -1,9 +1,10 @@
 pipeline {
     agent {label 'jdk11'}
+    parameters { choice(name: 'BRANCH', choices: ['NEW_PROJECT_1', 'main'], description: 'to build branch') }
     stages {
         stage ('vcs') {
             steps {
-                        git branch: 'NEW_PROJECT_1', url: 'https://github.com/krishna5683akp/spring-petclinic.git'
+                        git branch: "${params.BRANCH}", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
 
             }
         }
