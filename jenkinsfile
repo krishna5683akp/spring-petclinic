@@ -1,6 +1,7 @@
 pipeline {
     agent {label 'jdk11'}
     parameters { choice(name: 'BRANCH', choices: ['NEW_PROJECT_1', 'main'], description: 'to build branch') }
+    parameters { string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven_goal') }
     stages {
         stage ('vcs') {
             steps {
@@ -10,7 +11,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'mvn package'
+                sh "mvn ${params.MAVEN_GOAL"
             }
         }
         stage('archive junit') {
