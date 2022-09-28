@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'JAVA11'}
+    agent {label 'jdk11'}
     stages {
         stage ('vcs') {
             steps {
