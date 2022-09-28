@@ -1,7 +1,10 @@
 pipeline {
     agent {label 'jdk11'}
-    parameters { choice(name: 'BRANCH', choices: ['NEW_PROJECT_1', 'main'], description: 'to build branch') }
-               { string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven_goal') }
+    parameters {
+        choice(name: 'BRANCH', choices: ['NEW_PROJECT_1', 'main'], description: 'to build branch')
+        string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven_goal') 
+    }
+                
     stages {
         stage ('vcs') {
             steps {
