@@ -38,8 +38,9 @@ pipeline {
                     to : 'madasukrishnaprasad5683@gmail.com'
         }
         success {
-            junit '**/surefire-reports/*xml',
-            archive 'target/*.jar'
+            step('junit reports') {
+                junit '**/surefire-reports/*xml',
+                archive 'target/*.jar'
         }
     }
 }
