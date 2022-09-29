@@ -12,8 +12,8 @@ pipeline {
     stages {
         stage ('vcs') {
             steps {
-                mail subject : 'build started',
-                    body : 'build started',
+                mail subject : "build started for jenkins job $env.JOB_NAME",
+                    body : "build started for jenkins job $env.JOB_NAME",
                     to : 'madasukrishnaprasad5683@gmail.com'
                 git branch: "${params.BRANCH}", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
 
@@ -28,13 +28,13 @@ pipeline {
     post {
         always {
             echo "build complted"
-            mail subject : 'build completed',
-                    body : 'build completd',
+            mail subject : "build completed for jenkins job $env.JOB_NAME",
+                    body : "build completd for jenkins job $env.JOB_NAME",
                     to : 'madasukrishnaprasad5683@gmail.com' 
         }
         failure {
-            mail subject : 'build failure',
-                    body : 'build failure',
+            mail subject : "build failure for jenkins job $env.JOB_NAME",
+                    body : "build failure for jenkins job $env.JOB_NAME",
                     to : 'madasukrishnaprasad5683@gmail.com'
         }
         success {
