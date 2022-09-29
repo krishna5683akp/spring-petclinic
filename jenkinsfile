@@ -13,7 +13,7 @@ pipeline {
         stage ('vcs') {
             steps {
                 mail subject : "build started for jenkins job $env.JOB_NAME",
-                    body : "build started for jenkins job $env.JOB_NAME",
+                    body : "build started for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
                     to : 'madasukrishnaprasad5683@gmail.com'
                 git branch: "${params.BRANCH}", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
 
@@ -29,12 +29,12 @@ pipeline {
         always {
             echo "build complted"
             mail subject : "build completed for jenkins job $env.JOB_NAME",
-                    body : "build completd for jenkins job $env.JOB_NAME",
+                    body : "build completd for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
                     to : 'madasukrishnaprasad5683@gmail.com' 
         }
         failure {
             mail subject : "build failure for jenkins job $env.JOB_NAME",
-                    body : "build failure for jenkins job $env.JOB_NAME",
+                    body : "build failure for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
                     to : 'madasukrishnaprasad5683@gmail.com'
         }
         success {
