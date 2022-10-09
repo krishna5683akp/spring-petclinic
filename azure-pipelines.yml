@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-=======
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
->>>>>>> 399a4a536cc78a6ee69f124784563ea95a2b4838
 ---
 pool:
   vmImage: ubuntu-22.04
@@ -20,7 +13,3 @@ steps:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       jdkVersionOption: '1.11'
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 399a4a536cc78a6ee69f124784563ea95a2b4838
