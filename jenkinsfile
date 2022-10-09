@@ -17,12 +17,6 @@ pipeline {
         }
          stage ('Artifactory configuration') {
             steps {
-                rtServer (
-                    id: "JFROG_ID",
-                    url: "https://lovelykrish.jfrog.io/",
-                    credentialsId: "JFROG_CRED_ID"
-                )
-
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
