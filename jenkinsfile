@@ -11,9 +11,6 @@ pipeline {
     stages {
         stage ('vcs') {
             steps {
-                mail subject : "build started for jenkins job $env.JOB_NAME",
-                    body : "build started for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
-                    to : 'madasukrishnaprasad5683@gmail.com'
                 git branch: "NEW_PROJECT_1", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
 
             }
