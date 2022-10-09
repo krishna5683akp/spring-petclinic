@@ -1,8 +1,7 @@
 pipeline {
-    agent {label 'jdk11'}
+    agent any
     parameters {
-        choice(name: 'BRANCH', choices: ['NEW_PROJECT_1', 'main'], description: 'to build branch')
-        string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven_goal') 
+        string(name: 'MAVEN_GOAL', defaultValue: 'clean install', description: 'maven_goal') 
     }
     triggers {
         
@@ -15,31 +14,46 @@ pipeline {
                 mail subject : "build started for jenkins job $env.JOB_NAME",
                     body : "build started for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
                     to : 'madasukrishnaprasad5683@gmail.com'
-                git branch: "${params.BRANCH}", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
+                git branch: "NEW_PROJECT_1", url: 'https://github.com/krishna5683akp/spring-petclinic.git'
 
             }
         }
-        stage('build') {
+         stage ('Artifactory configuration') {
             steps {
-                sh "mvn ${params.MAVEN_GOAL}"
+                rtServer (
+                    id: "JFROG_ID",
+                    url: "https://lovelykrish.jfrog.io/",
+                    credentialsId: "JFROG_CRED_ID"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "JFROG_ID",
+                    releaseRepo: "krish-libs-release-local",
+                    snapshotRepo: "krish-libs-snapshot-local"
+                )
             }
         }
+
+        stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: "MAVEN_DEFAULT", // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER"
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "JFROG_ID"
+                )
+            }
+        }
+       
     }
-    post {
-        always {
-            echo "build complted"
-            mail subject : "build completed for jenkins job $env.JOB_NAME",
-                    body : "build completd for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
-                    to : 'madasukrishnaprasad5683@gmail.com' 
-        }
-        failure {
-            mail subject : "build failure for jenkins job $env.JOB_NAME",
-                    body : "build failure for jenkins job $env.JOB_NAME and buildID is $env.BUILD_ID",
-                    to : 'madasukrishnaprasad5683@gmail.com'
-        }
-        success {
-            junit '**/surefire-reports/*xml'
-            
-        }
-    }
+   
 }
