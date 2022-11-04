@@ -20,8 +20,8 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
-                    releaseRepo: "krish-libs-release-local",
-                    snapshotRepo: "krish-libs-snapshot-local"
+                    releaseRepo: "gunni-libs-release-local",
+                    snapshotRepo: "gunni-libs-snapshot-local"
                 )
             }
         }
