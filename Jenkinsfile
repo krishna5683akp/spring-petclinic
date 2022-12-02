@@ -2,9 +2,10 @@ pipeline {
     agent { label "Docker"}
     stages {
         stage("Docker build") {
-            steps {
-                sh 'docker image build -t spc:1.0 . '
-            }
+            agent { label "Docker"}
+                steps {
+                    sh 'docker image build -t spc:1.0 . '
+                }
         }
     }
 }
