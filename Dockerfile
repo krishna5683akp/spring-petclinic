@@ -1,6 +1,6 @@
 FROM maven:3.8.6-openjdk-11 as build
 ARG BRANCH=main
-RUN git clone https://github.com/krishna5683akp/spring-petclinic.git && \
+RUN git clone https://github.com/spring-projects/spring-petclinic.git && \
     cd /spring-petclinic && \
     git checkout ${BRANCH} && \
     mvn package
