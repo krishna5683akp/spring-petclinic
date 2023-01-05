@@ -50,6 +50,14 @@ pipeline {
                 )
             }
         }
+        // stage('docker image') {
+        //     steps {
+        //         sh """docker image build -t js:1.0 .
+        //             docker image tag js:1.0 madasu/js:1.0
+        //             docker push madasu/js:1.0"""
+        //     }
+        // }
+    }
     post {
         success {
             junit '**/surefire-reports/*.xml'
@@ -61,13 +69,5 @@ pipeline {
                  to: 'madasukrishnaprasad5683@gmail.com'           
         }
 
-    }
-        // stage('docker image') {
-        //     steps {
-        //         sh """docker image build -t js:1.0 .
-        //             docker image tag js:1.0 madasu/js:1.0
-        //             docker push madasu/js:1.0"""
-        //     }
-        // }
     }
 }
