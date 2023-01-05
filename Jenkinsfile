@@ -24,7 +24,6 @@ pipeline {
                 //     url: "https://fortestingmyself.jfrog.io/",
                 //     credentialsId: CREDENTIALS
                 // )
-
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
@@ -44,7 +43,6 @@ pipeline {
                 )
             }
         }
-
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
@@ -52,26 +50,26 @@ pipeline {
                 )
             }
         }
-        post{
-           success {
-                echo 'Job is completed' 
-                mail subject: 'build started for jenkins',
-                    body: 'build started for jenkins',
-                    to: 'madasukrishnaprasad5683@gmail.com' 
-            }
-            failure {
-                echo 'Job failed'
-                mail subject: 'build started for jenkins',
-                    body: 'build started for jenkins',
-                    to: 'madasukrishnaprasad5683@gmail.com' 
-            }
+    post{
+        success {
+            echo 'Job is completed' 
+            mail subject: 'build started for jenkins',
+                body: 'build started for jenkins',
+                to: 'madasukrishnaprasad5683@gmail.com' 
         }
-        stage('docker image') {
-            steps {
-                sh """docker image build -t js:1.0 .
-                    docker image tag js:1.0 madasu/js:1.0
-                    docker push madasu/js:1.0"""
-            }
+        failure {
+            echo 'Job failed'
+            mail subject: 'build started for jenkins',
+                body: 'build started for jenkins',
+                to: 'madasukrishnaprasad5683@gmail.com' 
         }
+    }
+        // stage('docker image') {
+        //     steps {
+        //         sh """docker image build -t js:1.0 .
+        //             docker image tag js:1.0 madasu/js:1.0
+        //             docker push madasu/js:1.0"""
+        //     }
+        // }
     }
 }
