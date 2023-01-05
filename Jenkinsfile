@@ -53,7 +53,7 @@ pipeline {
     post {
         failure {
             echo 'job failed'
-            mail subject 'build failed for jenkins',
+            mail subject: 'build failed for jenkins',
                  body: 'build failed for jenkins',
                  to: 'madasukrishnaprasad5683@gmail.com'           
         }
