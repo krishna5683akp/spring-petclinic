@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/krishna5683akp/spring-petclinic.git'
                 mail subject: 'build started for jenkins', 
                     body: 'build started for jenkins',
-                    to: 'madasukrishnaprasad5683@gmail.com',                
+                    to: 'madasukrishnaprasad5683@gmail.com'                
             }
         }
         // stage('installing dependencies') {
