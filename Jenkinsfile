@@ -37,7 +37,7 @@ pipeline {
                 rtMavenRun (
                     tool: MAVEN_TOOL, // Tool name from Jenkins configuration
                     pom: 'pom.xml',
-                    goals: 'mvn package',
+                    goals: 'package',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
                 )
