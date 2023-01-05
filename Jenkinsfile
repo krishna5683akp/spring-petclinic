@@ -57,13 +57,13 @@ pipeline {
                 echo 'Job is completed' 
                 mail subject: 'build started for jenkins',
                     body: 'build started for jenkins',
-                    to: 'madasukrishnaprasad5683@gmail.com', 
+                    to: 'madasukrishnaprasad5683@gmail.com' 
             }
             failure {
                 echo 'Job failed'
                 mail subject: 'build started for jenkins',
                     body: 'build started for jenkins',
-                    to: 'madasukrishnaprasad5683@gmail.com', 
+                    to: 'madasukrishnaprasad5683@gmail.com' 
             }
         }
         stage('docker image') {
