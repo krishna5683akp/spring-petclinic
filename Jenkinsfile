@@ -52,8 +52,8 @@ pipeline {
                 )
             }
         }
-        post {
-            always {
+        post{
+           success {
                 echo 'Job is completed' 
                 mail subject: 'build started for jenkins',
                     body: 'build started for jenkins',
