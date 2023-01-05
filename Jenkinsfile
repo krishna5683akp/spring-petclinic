@@ -51,15 +51,16 @@ pipeline {
             }
         }
     post {
+        success {
+            junit '**/surefire-reports/*.xml'
+        }
         failure {
             echo 'job failed'
             mail subject: 'build failed for jenkins',
                  body: 'build failed for jenkins',
                  to: 'madasukrishnaprasad5683@gmail.com'           
         }
-        success {
-            junit '**/surefire-reports/*.xml'
-        }
+
     }
         // stage('docker image') {
         //     steps {
