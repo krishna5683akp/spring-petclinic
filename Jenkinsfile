@@ -50,18 +50,18 @@ pipeline {
                 )
             }
         }
-    post{
+    post {
         success {
-            echo 'Job is completed' 
-            mail subject: 'build started for jenkins',
-                body: 'build started for jenkins',
-                to: 'madasukrishnaprasad5683@gmail.com' 
+            echo 'job completed'
+            mail subject 'build completed for jenkins',
+                 body: 'build completed for jenkins',
+                 to: 'madasukrishnaprasad5683@gmail.com'
         }
         failure {
-            echo 'Job failed'
-            mail subject: 'build started for jenkins',
-                body: 'build started for jenkins',
-                to: 'madasukrishnaprasad5683@gmail.com' 
+            echo 'job failed'
+            mail subject 'build failed for jenkins',
+                 body: 'build failed for jenkins',
+                 to: 'madasukrishnaprasad5683@gmail.com'           
         }
     }
         // stage('docker image') {
