@@ -1,5 +1,6 @@
 pipeline {
     agent { label 'OPENJDK' }
+    triggers { pollSCM('* * * * *') }
     stages {
         stage('git') {
             steps {
