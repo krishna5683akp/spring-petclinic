@@ -50,20 +50,17 @@ pipeline {
                 )
             }
         }
-    // post {
-    //     success {
-    //         echo 'job completed'
-    //         mail subject 'build completed for jenkins',
-    //              body: 'build completed for jenkins',
-    //              to: 'madasukrishnaprasad5683@gmail.com'
-    //     }
-    //     failure {
-    //         echo 'job failed'
-    //         mail subject 'build failed for jenkins',
-    //              body: 'build failed for jenkins',
-    //              to: 'madasukrishnaprasad5683@gmail.com'           
-    //     }
-    // }
+    post {
+        failure {
+            echo 'job failed'
+            mail subject 'build failed for jenkins',
+                 body: 'build failed for jenkins',
+                 to: 'madasukrishnaprasad5683@gmail.com'           
+        }
+        success {
+            junit '**/surefire-reports/*.xml'
+        }
+    }
         // stage('docker image') {
         //     steps {
         //         sh """docker image build -t js:1.0 .
