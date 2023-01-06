@@ -50,7 +50,7 @@ pipeline {
         stage('docker image') {
             steps {
                 sh """docker image build -t spc:1.0 .
-                    docker image tag fortestingmyself.jfrog.io/myrepo/spc:1.0
+                    docker image tag spc:1.0 fortestingmyself.jfrog.io/myrepo/spc:1.0
                     docker push fortestingmyself.jfrog.io/myrepo/spc:1.0"""
             }
         }
