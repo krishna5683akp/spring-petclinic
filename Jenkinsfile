@@ -19,11 +19,6 @@ pipeline {
         // }
         stage ('Artifactory configuration') {
             steps {
-                // rtServer (
-                //     id: "JFROG_ID",
-                //     url: "https://fortestingmyself.jfrog.io/",
-                //     credentialsId: CREDENTIALS
-                // )
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
@@ -38,8 +33,6 @@ pipeline {
                     tool: 'MAVEN_TOOL', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'package',
-                    // deployerId: "MAVEN_DEPLOYER",
-                    // resolverId: "MAVEN_RESOLVER"
                 )
             }
         }
@@ -50,13 +43,20 @@ pipeline {
                 )
             }
         }
-        // stage('docker image') {
-        //     steps {
-        //         sh """docker image build -t js:1.0 .
-        //             docker image tag js:1.0 madasu/js:1.0
-        //             docker push madasu/js:1.0"""
-        //     }
-        // }
+        stage ('SoanrQube Analysis') {
+            steps { 
+                withSonarQubeEnv('SONARQUBE') {
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+        stage('docker image') {
+            steps {
+                sh """docker image build -t spc:1.0 .
+                    docker image tag fortestingmyself.jfrog.io/myrepo/spc:1.0
+                    docker push fortestingmyself.jfrog.io/myrepo/spc:1.0"""
+            }
+        }
     }
     post {
         success {
