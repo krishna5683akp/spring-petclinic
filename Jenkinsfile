@@ -19,8 +19,8 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
-                    releaseRepo: "test-libs-release-local",
-                    snapshotRepo: "test-libs-snapshot-local"
+                    releaseRepo: "myrepo-libs-release-local",
+                    snapshotRepo: "myrepo-libs-snapshot-local"
                 )
             }
         }
