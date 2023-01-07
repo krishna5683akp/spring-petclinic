@@ -19,8 +19,8 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "JFROG_ID",
-                    releaseRepo: "myrepo-libs-release-local",
-                    snapshotRepo: "myrepo-libs-snapshot-local"
+                    releaseRepo: "fortetsingrepo-libs-release-local",
+                    snapshotRepo: "fortetsingrepo-libs-snapshot-local"
                 )
             }
         }
