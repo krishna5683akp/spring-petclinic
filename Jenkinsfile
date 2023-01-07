@@ -30,6 +30,7 @@ pipeline {
                     tool: 'MAVEN_TOOL', // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'package',
+                    deployerId: "MAVEN_DEPLOYER"
                 )
             }
         }
