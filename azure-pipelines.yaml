@@ -6,14 +6,13 @@ trigger:
 stages:
 - stage: this is build stage
   jobs:
-  - job: this is build job
-    steps: 
-      - task: Maven@3
-        inputs: 
-          mavenPOMFile: 'pom.xml'
-          goals: 'package'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          jdkVersionOption: '1.11'
+    - job: this is build job
+      steps: 
+        - task: Maven@3
+          inputs: 
+            mavenPOMFile: 'pom.xml'
+            goals: 'package'
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            jdkVersionOption: '1.11'
 
-          
