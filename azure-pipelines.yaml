@@ -1,6 +1,6 @@
 ---
-pool:
-  vmImage: ubuntu-22.04
+pool: 'testingpool'
+  # vmImage: ubuntu-22.04
 trigger:
   - NEW_PROJECT_1
 stages:
