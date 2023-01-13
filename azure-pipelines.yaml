@@ -15,3 +15,5 @@ stages:
           publishJUnitResults: true
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
           jdkVersionOption: '1.11'
+
+          
