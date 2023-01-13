@@ -65,13 +65,13 @@ pipeline {
         // }     
         stage('docker image') {
             steps {  
-                // withCredentials([usernamePassword(credentialsId: 'JFROG_ID', passwordVariable: 'jfrogpass', usernameVariable: 'jfroguser')]) {
+                // withCredentials([usernamePassword(credentialsId: 'JFROG_ID', passwordVariable: 'jfrogpass', usernameVariable: 'jfroguser')]) 
                 sh "curl -u ${jfroguser}:${jfrogpass} https://a0hc2ajqmkbn5.jfrog.io/ui/native/fortetsingrepo-libs-release/org/springframework/samples/spring-petclinic/2.7.3/spring-petclinic-2.7.3.jar"
                 sh """docker image build -t spc:1.0 .
                     docker image tag spc:1.0 fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}
-                    docker push fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}"""}
+                    docker push fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}"""
+                }
             }
-        }
     }
     post {
         success {
@@ -84,5 +84,6 @@ pipeline {
         //          to: 'madasukrishnaprasad5683@gmail.com'           
         // }
 
-    }
+    } 
 }
+
