@@ -65,11 +65,11 @@ pipeline {
         // }     
         stage('docker image') {
             steps {  
-                // withCredentials([usernamePassword(credentialsId: 'JFROG_ID', passwordVariable: 'jfrogpass', usernameVariable: 'jfroguser')]) 
-                sh "curl -u ${jfroguser}:${jfrogpass} https://a0hc2ajqmkbn5.jfrog.io/ui/native/fortetsingrepo-libs-release/org/springframework/samples/spring-petclinic/2.7.3/spring-petclinic-2.7.3.jar"
+                withCredentials([usernamePassword(credentialsId: 'JFROG_ID', passwordVariable: 'jfrogpass', usernameVariable: 'jfroguser')]) {
+}
                 sh """docker image build -t spc:1.0 .
-                    docker image tag spc:1.0 fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}
-                    docker push fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}"""
+                    docker image tag spc:1.0 a0hc2ajqmkbn5.jfrog.io/myrepo/spc:${BUILD_NUMBER}
+                    docker push a0hc2ajqmkbn5.jfrog.io/myrepo/spc:${BUILD_NUMBER}"""
                 }
             }
     }
