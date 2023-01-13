@@ -48,27 +48,28 @@ pipeline {
                 }
             }
         }
+        // stage('download url'){
+        //     steps {
+        //         rtDownload (
+        //             serverId: 'JFROG_ID',
+        //             spec: '''{
+        //                 "files": [
+        //                     {
+        //                     "pattern": "https://fortestingmyself.jfrog.io/artifactory/fortetsingrepo-libs-release-local/org/springframework/samples/spring-petclinic/2.7.3/",
+        //                     "target": "spring-petclinic-2.7.3.jar/"
+        //                     }
+        //                 ]
+        //             }''',
+        //         ) 
+        //     }
+        // }     
         stage('docker image') {
-            steps {
+            steps {  
+                withCredentials([usernamePassword(credentialsId: 'JFROG_ID', passwordVariable: 'jfrogpass', usernameVariable: 'jfroguser')]) {
+                sh "curl -u ${jfroguser}:${jfrogpass} https://fortestingmyself.jfrog.io/artifactory/fortetsingrepo-libs-release-local/org/springframework/samples/spring-petclinic/2.7.3/spring-petclinic-2.7.3.jar"
                 sh """docker image build -t spc:1.0 .
-                    docker image tag spc:1.0 fortestingmyself.jfrog.io/myrepo/spc:1.0
-                    docker push fortestingmyself.jfrog.io/myrepo/spc:1.0"""
-                // script {
-                //     def RES = "fortestingmyself.jfrog.io/myrepo/"
-                //     def appname = spc
-                //     if (gitBranch.contains('master')) {
-                //         docker image build -t {RES}/{appname}:{Buildnumber}
-                //         //fortestingmyself.jfrog.io/myrepo/spc:8
-                //     }else if (gitBranch.contains('feature/')) {
-                //         feature/lambda-test
-                //         env.extractbranch = gitBranch.sampleprinter("/")[0].toLowerCase()
-                //         env.extractbranch1 = gitBranch.sampleprinter("/")[1].toLowerCase()
-                //         docker build image -t {RES}/{appname}:{extractbranch}-{extractbranch1}-{Buildnumber}
-                //         //fortestingmyself.jfrog.io/myrepo/spc:feature-lambda-test-8
-                //     }else {
-                //         echo "image not build"
-                //     }
-                // }
+                    docker image tag spc:1.0 fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}
+                    docker push fortestingmyself.jfrog.io/myrepo/spc:${BUILD_NUMBER}"""}
             }
         }
     }
